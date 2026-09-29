@@ -44,7 +44,9 @@ const getGroups = async (req, res) => {
 
 const getGroupById = async (req, res) => {
   try {
-    const data = await Group.findById(req.params.id);
+    const data = await Group.findById(req.params.id)
+      .populate("group_stage_id")
+      .populate("branch_id");
 
     if (!data) {
       return res.status(404).json({

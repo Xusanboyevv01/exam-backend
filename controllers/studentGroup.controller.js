@@ -44,7 +44,9 @@ const getStudentGroups = async (req, res) => {
 
 const getStudentGroupById = async (req, res) => {
   try {
-    const data = await StudentGroup.findById(req.params.id);
+    const data = await StudentGroup.findById(req.params.id)
+      .populate("student_id")
+      .populate("group_id");
 
     if (!data) {
       return res.status(404).json({

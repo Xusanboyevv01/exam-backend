@@ -44,7 +44,11 @@ const getLids = async (req, res) => {
 
 const getLidById = async (req, res) => {
   try {
-    const data = await Lid.findById(req.params.id);
+    const data = await Lid.findById(req.params.id)
+      .populate("lid_stage_id")
+      .populate("trial_lesson_group_id")
+      .populate("lid_status_id")
+      .populate("cancel_reson_id");
 
     if (!data) {
       return res.status(404).json({

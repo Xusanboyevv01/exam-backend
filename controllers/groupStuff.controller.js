@@ -44,7 +44,9 @@ const getGroupStuffs = async (req, res) => {
 
 const getGroupStuffById = async (req, res) => {
   try {
-    const data = await GroupStuff.findById(req.params.id);
+    const data = await GroupStuff.findById(req.params.id)
+      .populate("group_id")
+      .populate("stuff_id");
 
     if (!data) {
       return res.status(404).json({

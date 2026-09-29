@@ -44,7 +44,8 @@ const getStudentss = async (req, res) => {
 
 const getStudentsById = async (req, res) => {
   try {
-    const data = await Students.findById(req.params.id);
+    const data = await Students.findById(req.params.id)
+      .populate("lid_id");
 
     if (!data) {
       return res.status(404).json({

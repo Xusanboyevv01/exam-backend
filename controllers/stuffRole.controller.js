@@ -44,7 +44,9 @@ const getStuffRoles = async (req, res) => {
 
 const getStuffRoleById = async (req, res) => {
   try {
-    const data = await StuffRole.findById(req.params.id);
+    const data = await StuffRole.findById(req.params.id)
+      .populate("stuff_id")
+      .populate("role_id");
 
     if (!data) {
       return res.status(404).json({

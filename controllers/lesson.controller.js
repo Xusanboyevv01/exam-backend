@@ -44,7 +44,8 @@ const getLessons = async (req, res) => {
 
 const getLessonById = async (req, res) => {
   try {
-    const data = await Lesson.findById(req.params.id);
+    const data = await Lesson.findById(req.params.id)
+      .populate("group_id");
 
     if (!data) {
       return res.status(404).json({
